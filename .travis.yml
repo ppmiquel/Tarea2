@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '4'
+- '4.2'
+- '4.1'
+- '4.0'
+- iojs
+deploy:
+  provider: heroku
+  api_key:
+    secure: aQF7+a6klNSlhDwYkt0aEutMcqXxy8fJSM021DFdqBDnomOJmNQ4UgsqUwNtNX0D2WCb+MAEx3GXUPZfa8pd70xB5Ox2B/cWJStCulCVFlFhSI5G2pqYdqFIRddbXkVhxchozcdniVHDwCUH5Ar/3P+JyiRo0bDHvLtX4oS7F1OvrtF2sBfuh27Pwcl3e+IImATNZuklwGWh3ci5mHTxzkWgKJsMrbYSdRmzoQFtpfoTw5L6bjoZ41eh+w2e1rBV81Fyrni//h08dfrIBB/OaIHcJHSqyNtpeQerOU52xNHapxBL83NCyOlTGAb3gawlsNuOETNJrSoDpRrlpldiFg7gLfLXfn4PCXvbsjIYQxaJer2O4PZl97zHI1YYGII0poNSg6Eg8eEDnhq9lc78y9T6kxnEsV8Hg65NGoecqwGQyHhunvA7Ouzap0Yk1Zi1uZ/J501kVe/JuPmC8fpMnYvfpZ/1MzWpFpHGybW6uhFeU2iNke/UDh4a+MWUom3AOWUzx4xqsncI9FpBn3SasesvkgAqXUDr03kUhdfwhriB8zAX7XyZoDtkWqX6+7tY7qC+OTv/6AoyQ6c9rx7VeKv0LEWT2eDtVNZ1qSw1Pdee4aR/yyUinVTGe92ndbbdl+XJgFMgudN68DRH5gkNUKM87nlxaDK0oP5PIjMc1yg=
+  on: master
+  app: tarea-2-ppmiquel
