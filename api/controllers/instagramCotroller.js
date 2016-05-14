@@ -19,5 +19,4 @@ getTagMedia: function(req,res){
 	ig.use({ access_token: '3231014232.1677ed0.7c68b172e604438cb5e385d8fad65b5d' });
 	ig.tag_media_recent(tag.toString(), function(err, medias, pagination, remaining, limit) {});
 }
-
 };
