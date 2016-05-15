@@ -58,7 +58,7 @@ getTag: function (req,res){
   	})
   	.then(function(posts){
   		response.posts = posts;
-  		response.version = '1.0.1';
+  		response.version = '1.0.15';
   		res.json(response);	
   	})
 
