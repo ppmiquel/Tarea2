@@ -34,8 +34,12 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
 
+  'POST /instagram/tag/buscar': {
+    controller: "instagramController", action:"getTag"
+
+  }
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
