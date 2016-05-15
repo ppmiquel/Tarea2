@@ -5,10 +5,10 @@ var ig = require('instagram-node').instagram();
 
 module.exports = {
 
-getTagInfo: function (tag){
+getTagInfo: function (tag,token){
 	
 	return new promise(function(resolve,reject){
-		ig.use({ access_token: '3231014232.1677ed0.7c68b172e604438cb5e385d8fad65b5d' });
+		ig.use({ access_token: [token]});
 		ig.tag(tag.toString(),function(err,result,remaining,limit){var cantidad = result["media_count"]
 		resolve(cantidad)
 	});
@@ -16,18 +16,24 @@ getTagInfo: function (tag){
 
 },
 
-getTagMedia: function(tag){
+getTagMedia: function(tag,token){
 
 	return new promise(function(resolve,reject){
-		ig.use({ access_token: '3231014232.1677ed0.7c68b172e604438cb5e385d8fad65b5d' });
+		ig.use({ access_token: [token]});
 		ig.tag_media_recent(tag.toString(), function(err, medias, pagination, remaining, limit) {
 			var posts = [];
-			for (var i = 0; i<medias.lenght;i++){
+			for (var i = 0; i < Object.key(medias).lenght;i++){
 				var aux = {
 					tags: posts[i].tags,
 					username: posts[i].user.username,
-					likes: posts[i].likes.count
-
+					likes: posts[i].likes.count,
+					if(posts[i].type == 'images'){
+						url: posts[i].images.standard_resolution.url
+					}
+					else if(posts[i].type == 'video'){
+						url: posts[i].video.standard_resolution.url
+					}
+					caption: posts[i].caption.text
 				}
 				posts.push(aux);
 			}
@@ -38,24 +44,25 @@ getTagMedia: function(tag){
 },
 
 getTag: function (req,res){
-	var tag = req.body.tag;
 	var self = this;
-	//var token = req.body.token;
+	var tag = req.body.tag;
+	var token = req.body.token;
 	if(!tag)
   		return res.badRequest('Falta el tag');
-  	//if(!token)
-  	//	return res.badRequest('Falta el token de autorización');
+  	if(!token)
+  		return res.badRequest('Falta el token de autorización');
   	var response = {};
-  	self.getTagInfo(tag)
+  	self.getTagInfo(tag,token)
   	.then(function(cantidad){
   		response.metadata = {total: cantidad};
-  		return self.getTagMedia(tag);	
+  		return self.getTagMedia(tag,token);	
   	})
   	.then(function(posts){
   		response.posts = posts;
-  		res.json(response);
+  		
   	})
-
+  	response.version = '1.0.1';
+  	res.json(response);
 }
 
 };
