@@ -6,8 +6,8 @@ node_js:
 - '4.0'
 - iojs
 deploy:
-  app: tarea-2-ppmiquel
   provider: heroku
   api_key:
     secure: TCrYw6NPiWQPE0t6h8mN/kqDUvMNXstK/i1v4m04VECswkpjz1Q5nd4VJIawu/9ZStiE+Ert0nR/9oLud5fwpc4yzTMN+A+95GRvt3wOfOmmn2G7L6pU2Esh9+yi7oZEreCMQLIgK5yzLoGCcOAeN4FHAYig9EtBAnNugP7ZFM+gmB1YzFMiXsvBNJc/pJ05NOum3uW5X1XjhKzKkxLkK/30Jo2O4bsuZaUoSmc+ml/gC2yq+W4wJxkGs/zEtIEL9+osVNFEvY4k3zoMO+8FAlptJTtLcPFEZGcUR8WwLRrm5RnW3nGitnZkW/Z9hz6yM2w16OHs0Pnub23ovUXTYThoepePAD/wE5ucE6Akr+jyZ6LLdGWQ6Fnx9Whsbgta5liwPZsApmHZIzWLqI5mCevvdOv/sVd9mIrLfAbK7I6UMlHI6ZPbh9XjzyV9LXRXKwmg11jSt8QmsgCk2murcaOA6oCFhMCZNV2pZxc2Q06+D2l+X3ix1WIc977QFsAlWbn073La+BsYHz1gAbetwFJaHJ68091AK5tJ+9N/6PLGBre9AJEOh555VWGaXoRVSdX+l3MJoeZSGhnpfuTGcftSrYgbmUPungIWMJQ0ZpTf6rBEtK9h0BdXAr0vzd0R7jamgNXfty15HQvRji7ggH++fdzCgeFG4UazdOnM68c=
+  app: tarea-2-ppmiquel
   on: master
