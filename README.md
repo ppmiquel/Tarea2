@@ -1,3 +1,3 @@
 # Tarea2
 
-a [Sails](http://sailsjs.org) application
+[![Build Status](https://travis-ci.org/ppmiquel/Tarea2.svg?branch=master)](https://travis-ci.org/ppmiquel/Tarea2)
