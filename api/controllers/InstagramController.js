@@ -5,10 +5,10 @@ var ig = require('instagram-node').instagram();
 
 module.exports = {
 
-getTagInfo: function (tag){
+getTagInfo: function (tag,token){
 	
 	return new promise(function(resolve,reject){
-		ig.use({ access_token: '2019746130.59a3f2b.86a0135240404ed5b908a14c0a2d9402'});
+		ig.use({ access_token: token});
 		ig.tag(tag.toString(),function(err,result,remaining,limit){var cantidad = result["media_count"]
 		resolve(cantidad)
 	});
@@ -16,28 +16,27 @@ getTagInfo: function (tag){
 
 },
 
-getTagMedia: function(tag){
+getTagMedia: function(tag,token){
 
 	return new promise(function(resolve,reject){
-		ig.use({ access_token: '2019746130.59a3f2b.86a0135240404ed5b908a14c0a2d9402'});
+		ig.use({ access_token: token});
 		ig.tag_media_recent(tag.toString(), function(err, medias, pagination, remaining, limit) {
 			var posts = [];
-			for (var i = 0; i < Object.key(medias).lenght;i++){
-				var aux = {
-					tags: posts[i].tags,
-					username: posts[i].user.username,
-					likes: posts[i].likes.count,
-					if(posts[i].type == 'images'){
-						url: posts[i].images.standard_resolution.url
-					}
-					else if(posts[i].type == 'video'){
-						url: posts[i].video.standard_resolution.url
-					}
-					caption: posts[i].caption.text
+			for (var i = 0; i < medias.length;i++){
+				var aux = {};
+				aux.tags = medias[i].tags;
+				aux.username = medias[i].user.username;
+				aux.likes = medias[i].likes.count;
+				if(medias[i].type == 'images'){
+					aux.url = medias[i].images["standard_resolution"].url;
 				}
+				else if(medias[i].type == 'video'){
+					aux.url = medias[i].videos["standard_resolution"].url;
+				}
+				aux.caption = medias[i].caption.text;
 				posts.push(aux);
 			}
-			resolve(posts);
+			resolve(medias);
 		});
 	})
 
@@ -46,23 +45,23 @@ getTagMedia: function(tag){
 getTag: function (req,res){
 	var self = this;
 	var tag = req.body.tag;
-	var access_token = req.body.access_token;
+	var token = req.body["access_token"];
 	if(!tag)
   		return res.badRequest('Falta el tag');
-  	//if(!access_token)
-  	//	return res.badRequest('Falta el token de autorización');
+  	if(!token)
+  		return res.badRequest('Falta el token de autorización');
   	var response = {};
-  	self.getTagInfo(tag)
+  	self.getTagInfo(tag,token)
   	.then(function(cantidad){
   		response.metadata = {total: cantidad};
-  		return self.getTagMedia(tag);	
+  		return self.getTagMedia(tag,token);	
   	})
   	.then(function(posts){
   		response.posts = posts;
-  		
+  		response.version = '1.0.1';
+  		res.json(response);	
   	})
-  	response.version = '1.0.1';
-  	res.json(response);
+
 }
 
 };
