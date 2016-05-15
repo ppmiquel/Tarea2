@@ -27,7 +27,7 @@ getTagMedia: function(tag,token){
 				aux.tags = medias[i].tags;
 				aux.username = medias[i].user.username;
 				aux.likes = medias[i].likes.count;
-				if(medias[i].type == 'images'){
+				if(medias[i].type == 'image'){
 					aux.url = medias[i].images["standard_resolution"].url;
 				}
 				else if(medias[i].type == 'video'){
@@ -36,7 +36,7 @@ getTagMedia: function(tag,token){
 				aux.caption = medias[i].caption.text;
 				posts.push(aux);
 			}
-			resolve(medias);
+			resolve(posts);
 		});
 	})
 
@@ -58,7 +58,7 @@ getTag: function (req,res){
   	})
   	.then(function(posts){
   		response.posts = posts;
-  		response.version = '1.0.1';
+  		response.version = '1.0.15';
   		res.json(response);	
   	})
 
